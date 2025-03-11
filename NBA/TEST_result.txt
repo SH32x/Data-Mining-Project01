@@ -1,0 +1,31 @@
+PS C:\Users\格远\Desktop\UOIT\Winter_25\DataMining\NBA> & C:/Python312/python.exe c:/Users/格远/Desktop/UOIT/Winter_25/DataMining/NBA/run_all_names.py
+
+ Run: check_player_performance.py ...
+Player scores have been saved to formatted_player_points.txt
+Player appearances have been saved to player_appearances.txt
+✅ check_player_performance.py finished
+
+
+ Run: predict_name_by_points.py ...
+Processing: 26593/26593 (100.00%)
+predict_name_by_points_acc: 7.00% (1805/25785)
+✅ predict_name_by_points.py finished
+
+
+ Run: predict_name_by_appearances.py ...
+Processing: 26593/26593 (100.00%)
+✅ predict_name_by_appearances.py finished
+
+
+ Run: predict_name_by_KNN_same_home_team_members.py ...
+Processing: 26593/26593 (100.00%)
+predict_name_by_KNN_same_home_team_members_acc: 9.89%  (2630 / 26593)
+✅ predict_name_by_KNN_same_home_team_members.py finished
+
+
+Processing: 26593/26593 (100.00%)
+predict_name_by_KNN_same_team_member_acc: 10.81%  (2875 / 26593)
+✅ predict_name_by_KNN_same_team_member.py finished
+
+
+🎉 所有脚本执行完成!
