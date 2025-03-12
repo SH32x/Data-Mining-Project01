@@ -15,7 +15,7 @@ try:
 except Exception as e:
     print("error")
 
-# **测试数据文件 (使用完整 matchups-2008.csv 数据)**
+# 测试数据文件 
 test_file = "matchups-2009.csv" #✅
 
 # **读取完整数据**

@@ -1,16 +1,18 @@
 import pandas as pd
-#check player performance
 
 # **文件路径**
-file_path = "matchups-2008.csv"#✅
+file_paths = ["./matchups-2008.csv", "./matchups-2007.csv"]  
 
-# **计算 80% 数据的行数**
-total_rows = sum(1 for _ in open(file_path, encoding="utf-8")) - 1  # 减去表头
-#train_rows = int(0.8 * total_rows)  # 取前 80%
-train_rows = total_rows  # **读取前 1000 行数据**
+# **读取第一个文件，保留表头**
+df_list = [pd.read_csv(file_paths[0])]
 
-# **读取前 80% 的数据**
-df = pd.read_csv(file_path, nrows=train_rows)
+# **读取其余文件，但跳过表头**
+for file in file_paths[1:]:
+    df_temp = pd.read_csv(file, header=None, skiprows=1, names=df_list[0].columns)
+    df_list.append(df_temp)
+
+# **合并所有数据**
+df = pd.concat(df_list, ignore_index=True)
 
 # 确保球员列为字符串
 player_columns = ["home_0", "home_1", "home_2", "home_3", "home_4",
@@ -107,4 +109,4 @@ with open(output_file_appearances, "w", encoding="utf-8") as f:
         f.write(formatted_row + "\n")
 
 print(f"Player scores have been saved to {output_file_points}")
-print(f"Player appearances have been saved to {output_file_appearances}") 
+print(f"Player appearances have been saved to {output_file_appearances}")  
