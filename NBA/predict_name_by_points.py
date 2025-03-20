@@ -4,12 +4,12 @@ from collections import Counter
 
 # **获取运行时参数**
 if len(sys.argv) < 3:
-    print("Usage: python script.py <train_file> <test_file>")
+    print("Usage: python predict_name_by_points.py <train_file> <test_file>")
     sys.exit(1)
 
 train_file = sys.argv[1]
 test_file = sys.argv[2]
-output_file = "points_predictions.txt"
+output_file = ".\\outcome_data\\points_predictions.txt"
 
 # **读取数据**
 df_train = pd.read_csv(train_file)
@@ -17,8 +17,8 @@ df_test = pd.read_csv(test_file)
 
 # **去掉无关列**
 drop_columns = ["game", "season"]
-df_train = df_train.drop(columns=drop_columns)
-df_test = df_test.drop(columns=drop_columns)
+df_train = df_train.drop(columns=drop_columns, errors='ignore')
+df_test = df_test.drop(columns=drop_columns, errors='ignore')
 
 # **创建球队历史出场字典**
 team_player_combinations = {}

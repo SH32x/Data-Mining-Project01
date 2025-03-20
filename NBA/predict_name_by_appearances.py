@@ -3,7 +3,7 @@ import sys
 
 # **获取命令行参数**
 if len(sys.argv) != 3:
-    print("Usage: python script.py <appearances_file> <test_file>")
+    print("Usage: python predict_name_by_appearances.py <appearances_file> <test_file>")
     sys.exit(1)
 
 appearances_file = sys.argv[1]
@@ -59,7 +59,7 @@ for idx, row in enumerate(test_data.itertuples(index=False), start=1):
     sys.stdout.flush()
 
 # **写入预测结果到文件**
-with open("appearances_predictions.txt", "w") as f:
+with open(".\\outcome_data\\appearances_predictions.txt", "w") as f:
     for prediction in predictions:
         f.write(prediction + "\n")
 

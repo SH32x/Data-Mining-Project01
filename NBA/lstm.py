@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
 from keras.models import Model
 from keras.layers import Input, Embedding, LSTM, Dense, Concatenate, Flatten
 from keras.callbacks import EarlyStopping
@@ -70,8 +69,7 @@ def preprocess_data(train_path, test_path, player_threshold=5):
                  train_df['home_team'].values, train_df['away_team'].values,
                  train_df['home_4'].values),
         'test': (test_home, test_away,
-                test_df['home_team'].values, test_df['away_team'].values,
-                test_df['home_4'].values if 'home_4' in test_df.columns else None),
+                test_df['home_team'].values, test_df['away_team'].values),
         'encoders': (player_encoder, team_encoder)
     }
 
@@ -114,10 +112,15 @@ def build_model(player_vocab_size, team_vocab_size):
 
 # 主程序
 if __name__ == "__main__":
+    # **修改数据集路径**
+    train_path = './train_data/matchups-all.csv'
+    test_path = './test_data/test_2016.csv'
+    output_file = './outcome_data/lstm.txt'
+
     # 预处理数据
-    data = preprocess_data('matchups-2008.csv', 'matchups-2009.csv')
+    data = preprocess_data(train_path, test_path)
     (train_home, train_away, train_h_team, train_a_team, y_train) = data['train']
-    (test_home, test_away, test_h_team, test_a_team, y_test) = data['test']
+    (test_home, test_away, test_h_team, test_a_team) = data['test']
     player_encoder, team_encoder = data['encoders']
 
     # 转换为numpy数组
@@ -151,17 +154,9 @@ if __name__ == "__main__":
     predicted_labels = np.argmax(predictions, axis=1)
     predicted_players = player_encoder.inverse_transform(predicted_labels)
 
-    # 保存结果
-    test_df = pd.read_csv('matchups-2009.csv')
-    test_df['predicted_home_4'] = predicted_players
-    test_df.to_csv('predictions-2009.csv', index=False)
+    # **输出到 ./outcome_data/lstm.txt**
+    with open(output_file, "w", encoding="utf-8") as f:
+        for player in predicted_players:
+            f.write(player + "\n")
 
-    # 计算准确率（如果测试集有标签）
-    if y_test is not None:
-        y_test_players = player_encoder.inverse_transform(y_test)
-        correct_predictions = np.sum(predicted_players == y_test_players)  # 计算预测正确的数量
-        total_predictions = len(y_test_players)  # 总预测数
-        accuracy = correct_predictions / total_predictions  # 计算准确率
-        print(f"Test Accuracy: {accuracy:.4f} ({correct_predictions}/{total_predictions} correct)")
-    else:
-        print("Predictions saved to predictions-2009.csv")
+    print(f"\n✅ Predictions saved to {output_file}")

@@ -16,8 +16,8 @@ df_test = pd.read_csv(test_file)
 
 # **去掉无关列**
 drop_columns = ["game", "season"]
-df_train = df_train.drop(columns=drop_columns)
-df_test = df_test.drop(columns=drop_columns)
+df_train = df_train.drop(columns=drop_columns, errors='ignore')
+df_test = df_test.drop(columns=drop_columns, errors='ignore')
 
 # **创建球队历史出场字典**
 team_player_combinations = {}
@@ -70,7 +70,7 @@ for idx, row in enumerate(df_test.itertuples(index=False), start=1):
     sys.stdout.flush()
 
 # **写入预测结果到文件**
-with open("KNN_all_predictions.txt", "w") as f:
+with open(".\\outcome_data\\KNN_all_predictions.txt", "w") as f:
     for prediction in predictions:
         f.write(prediction + "\n")
 

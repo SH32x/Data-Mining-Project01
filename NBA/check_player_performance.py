@@ -77,8 +77,8 @@ player_stats_reset = player_stats.reset_index(drop=True)
 player_stats_reset.index += 1  # 让序号从 1 开始
 
 # **格式化输出到 TXT 文件**
-output_file_points = "formatted_player_points.txt"
-output_file_appearances = "player_appearances.txt"
+output_file_points = ".\\train_data\\formatted_player_points.txt"
+output_file_appearances = ".\\train_data\\player_appearances.txt"
 
 # 让列名对齐
 formatted_header_points = "{:<6} {:<20} {:<8} {:<10} {:<10} {:<10}".format(
