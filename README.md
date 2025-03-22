@@ -80,9 +80,8 @@ Only after discovering that the same season's training data could be used for pr
 - Extends the above model by also including games where the team was the **away** team during training.
 - Provides more training data, but the `"Unknown"` issue persists and limits prediction accuracy.
 
----
 
-## Model Accuracy (Only Predicting `home_4`)
+## Model Accuracy (If Only Predicting `home_4`)
 
 | Training & Testing Season | Appearance-Based | Point-Based | KNN (Home Only) | KNN (Home + Away) |
 |---------------------------|------------------|-------------|------------------|--------------------|
