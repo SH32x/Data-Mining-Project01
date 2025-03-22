@@ -1,3 +1,0 @@
-Accuracy: 85.33%
-Correct: 768
-Total: 900
