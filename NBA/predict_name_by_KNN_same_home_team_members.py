@@ -1,11 +1,14 @@
 import pandas as pd
 import sys
 from collections import Counter
-from sklearn.metrics import accuracy_score
 
-# **文件路径**
-train_file = "matchups-2008.csv"#✅
-test_file = "matchups-2009.csv"#✅
+# **获取命令行参数**
+if len(sys.argv) != 3:
+    print("Usage: python predict_name_by_KNN_same_home_team_members.py <train_file> <test_file>")
+    sys.exit(1)
+
+train_file = sys.argv[1]
+test_file = sys.argv[2]
 
 # **读取数据**
 df_train = pd.read_csv(train_file)
@@ -13,8 +16,8 @@ df_test = pd.read_csv(test_file)
 
 # **去掉无关列**
 drop_columns = ["game", "season"]
-df_train = df_train.drop(columns=drop_columns)
-df_test = df_test.drop(columns=drop_columns)
+df_train = df_train.drop(columns=drop_columns, errors='ignore')
+df_test = df_test.drop(columns=drop_columns, errors='ignore')
 
 # **创建球队历史出场字典**
 team_player_combinations = {}
@@ -35,16 +38,14 @@ for _, row in df_train.iterrows():
     team_player_combinations[home_team][player_combination].append(row["home_4"])
 
 # **测试阶段**
-correct_predictions = 0
-total_predictions = 0
+predictions = []
 total_rows = len(df_test)
 
 for idx, row in enumerate(df_test.iterrows(), start=1):
     home_team = row[1]["home_team"]
     player_combination = tuple(sorted([row[1]["home_0"], row[1]["home_1"], row[1]["home_2"], row[1]["home_3"]]))
-    true_home_4 = row[1]["home_4"]
 
-    predicted_home_4 = None
+    predicted_home_4 = "Unknown"
 
     # **如果该球队有历史数据**
     if home_team in team_player_combinations and player_combination in team_player_combinations[home_team]:
@@ -53,18 +54,17 @@ for idx, row in enumerate(df_test.iterrows(), start=1):
         
         if most_common_player:
             predicted_home_4 = most_common_player[0][0]
-
-    # **计算准确率**
-    if predicted_home_4 == true_home_4:
-        correct_predictions += 1
     
-    total_predictions += 1
+    predictions.append(predicted_home_4)
     
     # **更新进度条**
     progress = f"Processing: {idx}/{total_rows} ({(idx/total_rows)*100:.2f}%)\r"
     sys.stdout.write(progress)
     sys.stdout.flush()
 
-# **输出预测结果**
-accuracy = correct_predictions / total_predictions if total_predictions > 0 else 0
-print(f"\npredict_name_by_KNN_same_home_team_members_acc:🔹 {accuracy:.2%}  ({correct_predictions} / {total_predictions})")
+# **写入预测结果到文件**
+with open(".\\outcome_data\\KNN_home_predictions.txt", "w") as f:
+    for prediction in predictions:
+        f.write(prediction + "\n")
+
+print("\nPredictions saved to KNN_home_predictions.txt")

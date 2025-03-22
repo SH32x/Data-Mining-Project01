@@ -1,7 +1,12 @@
 import pandas as pd
+import sys
 
-# **文件路径**
-file_paths = ["./matchups-2008.csv", "./matchups-2007.csv"]  
+# **获取运行时参数**
+if len(sys.argv) < 2:
+    print("Usage: python script.py <file1> <file2> ...")
+    sys.exit(1)
+
+file_paths = sys.argv[1:]
 
 # **读取第一个文件，保留表头**
 df_list = [pd.read_csv(file_paths[0])]
@@ -72,8 +77,8 @@ player_stats_reset = player_stats.reset_index(drop=True)
 player_stats_reset.index += 1  # 让序号从 1 开始
 
 # **格式化输出到 TXT 文件**
-output_file_points = "formatted_player_points.txt"
-output_file_appearances = "player_appearances.txt"
+output_file_points = ".\\train_data\\formatted_player_points.txt"
+output_file_appearances = ".\\train_data\\player_appearances.txt"
 
 # 让列名对齐
 formatted_header_points = "{:<6} {:<20} {:<8} {:<10} {:<10} {:<10}".format(
@@ -109,4 +114,4 @@ with open(output_file_appearances, "w", encoding="utf-8") as f:
         f.write(formatted_row + "\n")
 
 print(f"Player scores have been saved to {output_file_points}")
-print(f"Player appearances have been saved to {output_file_appearances}")  
+print(f"Player appearances have been saved to {output_file_appearances}")
