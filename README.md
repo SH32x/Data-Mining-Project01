@@ -1,6 +1,6 @@
 
 
-# NBA Starting Lineup Prediction
+# NBA Lineup Prediction
 
 ## Final Model
 
