@@ -1,6 +1,13 @@
 
 
-# NBA Lineup Prediction
+# 🏀 NBA Lineup Prediction
+
+## Overview
+This project addresses a multi-label classification task, aiming to predict multiple missing players in NBA starting lineups using historical matchup data.
+
+**Goal:** 
+To design and develop a machine learning models that predicts the optimal fifth player for a home team in an NBA game, given partial lineup data and other game-related features. The model should maximize the home team's overall performance
+
 
 ## Final Model
 
@@ -15,6 +22,7 @@
 
 ## Data Structure
 
+- `NBA_/` and `NBA_Experiment/`: Contains various experiments done with the original dataset.
 - `Original_training_data/`: Contains raw training data (unmodified).
 - `Modified_test_data/`: Contains test data. Files named like `KNN_test_20XX.csv` are subsets of the test set, split by season (e.g., `KNN_test_2007.csv`, `KNN_test_2008.csv`).
 
