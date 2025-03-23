@@ -92,8 +92,8 @@ Only after discovering that the same season's training data could be used for pr
 
 | Training & Testing Season | Appearance-Based | Point-Based | KNN (Home Only) | KNN (Home + Away) |
 |---------------------------|------------------|-------------|------------------|--------------------|
-| Same Season               | ~30%             | ~30%        | ~50%             | ~60%               |
-| Different Seasons         | ~10%             | ~10%        | ~15%             | ~15%               |
+| Same Season               | ~20%             | ~10%        | ~60%             | ~70%               |
+| Different Seasons         | ~<10%            | ~5%        | ~12%             | ~15%               |
 
 > Note: When the task requires predicting unknown players at **random positions** (as in `NBA_test.csv`), none of these four models achieves over 10% accuracy.
 
