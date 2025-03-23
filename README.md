@@ -9,6 +9,7 @@
   - `FINAL_RESULT.csv`: Final result file containing `Game_ID`, `Home_Team`, and `Fifth_Player`.
   - `result_compare.csv`: File comparing model predictions with ground truth, with columns `KNN_output`, `NBA_label`, and `Match`.
   - `.\outcome_data\KNN_output_all.csv`: Consolidated file containing all predictions.
+- **Final Accuracy**: 79.5% (795/1000)
 
 
 
