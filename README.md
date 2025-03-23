@@ -18,9 +18,7 @@
 - `Original_training_data/`: Contains raw training data (unmodified).
 - `Modified_test_data/`: Contains test data. Files named like `KNN_test_20XX.csv` are subsets of the test set, split by season (e.g., `KNN_test_2007.csv`, `KNN_test_2008.csv`).
 
-**Important**: All input and output paths in the models are hardcoded.  
-To successfully run `new_KNN.py` or any other model, you **must navigate into the `NBA/` directory** and follow the instructions in its internal `readme.md`.  
-If the file structure does not match the expected format, the scripts will not run correctly.
+⚠️**Important**: All input and output paths in the models are hardcoded.  To successfully run `new_KNN.py` or any other model, you **must navigate into the `NBA` directory** and follow the instructions in its internal `readme.md`.  If the file structure does not match the expected format, the scripts will not run correctly.
 
 
 
