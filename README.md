@@ -21,7 +21,7 @@ To design and develop a machine learning models that predicts the optimal fifth 
 
 
 ## Data Structure
-
+- `NBA_Matchups_EDA_.ipynb`: Exploratory data analysis of the original dataset given
 - `NBA_/` and `NBA_Experiment/`: Contains various experiments done with the original dataset.
 - `Original_training_data/`: Contains raw training data (unmodified).
 - `Modified_test_data/`: Contains test data. Files named like `KNN_test_20XX.csv` are subsets of the test set, split by season (e.g., `KNN_test_2007.csv`, `KNN_test_2008.csv`).
